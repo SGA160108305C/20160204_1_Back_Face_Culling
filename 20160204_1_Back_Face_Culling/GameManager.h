@@ -18,8 +18,8 @@ public:
 	~GameManager();
 
 	//윈도우 기본 정보가 될 데이터
-	static const int RESOLUTION_X = 1280;
-	static const int RESOLUTION_Y = 720;
+	static const int RESOLUTION_X = 800;
+	static const int RESOLUTION_Y = 600;
 	static const WCHAR WINDOW_CLASS_NAME[];		
 	static const WCHAR WINDOW_TITLE_CAPTION[];	
 
