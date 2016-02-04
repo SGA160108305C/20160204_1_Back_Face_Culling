@@ -35,6 +35,9 @@ public:
 	inline const Matrix& GetProjectionMatrix(){ return projectionMatrix; }
 	inline const Matrix& GetViewPortMatrix(){ return viewportMatrix; }
 
+	inline const Vector3D& getEye() { return eye; }
+	inline const Vector3D& getLookAt() { return lookAt; }
+
 
 private:
 	double lastTickTime = 0.0f;

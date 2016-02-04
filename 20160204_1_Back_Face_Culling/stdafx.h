@@ -9,6 +9,8 @@
 using namespace std;
 #pragma comment(lib, "winmm.lib")
 
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+
 //¼öÇÐ¿ë
 #include "Vector3D.h"
 #include "Matrix.h"

@@ -1,3 +1,5 @@
+#include "stdafx.h"
+#include <stdio.h>
 #include "Cube.h"
 
 Cube::Cube()
@@ -53,6 +55,12 @@ void Cube::Render(HDC targetDC,
 		v1 = viewProj * viewport * v1;
 		v2 = viewProj * viewport * v2;
 		v3 = viewProj * viewport * v3;
+
+		Vector3D faceDir = (v2 - v1).Cross(v3 - v1);
+		Vector3D lookAtDir = g_GameManager.getLookAt() - g_GameManager.getEye();
+		float test = faceDir.Dot(lookAtDir) / faceDir.Length() - lookAtDir.Length();
+		printf_s("%d -> cos: %.2f\n", i, cosf(test));
+		if (cosf(test) < 0) break;
 
 		//v1 = viewProj * v1;
 		////백페이스 컬링

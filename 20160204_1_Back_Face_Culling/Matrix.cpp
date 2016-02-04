@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <Windows.h>
 #include <math.h>
 #include "Matrix.h"
@@ -463,6 +464,13 @@ void Matrix::View(Matrix& out, Vector3D& eye, Vector3D& lookAt, Vector3D& up)
 	out.num[3][0] = -rightDir.Dot(eye);
 	out.num[3][1] = -upDir.Dot(eye);
 	out.num[3][2] = -lookDir.Dot(eye);
+
+	printf_s("\nView Matrix\n");
+	printf_s("-------------\n");
+	for (int i = 0; i < 4; i++)
+	{
+		printf_s("%.2f %.2f %.2f %.2f\n", out.num[i][0], out.num[i][1], out.num[i][2], out.num[i][3]);
+	}
 }
 
 void Matrix::Projection(Matrix& out, float fovY, float aspect, float nearZ, float farZ)
@@ -478,6 +486,13 @@ void Matrix::Projection(Matrix& out, float fovY, float aspect, float nearZ, floa
 	out.num[2][3] = 1.0f;
 	out.num[3][2] = -farZ * nearZ / (farZ - nearZ);
 	out.num[3][3] = 0.0f;
+
+	printf_s("\nProjection Matrix\n");
+	printf_s("-------------------\n");
+	for (int i = 0; i < 4; i++)
+	{
+		printf_s("%.2f %.2f %.2f %.2f\n", out.num[i][0], out.num[i][1], out.num[i][2], out.num[i][3]);
+	}
 }
 
 void Matrix::ViewPort(Matrix& out, float x, float y, float w, float h, float minZ /*= 0.0f*/, float maxZ /*= 1.0f*/)
@@ -490,4 +505,11 @@ void Matrix::ViewPort(Matrix& out, float x, float y, float w, float h, float min
 	out.num[3][0] = x + w * 0.5f;
 	out.num[3][1] = y + h * 0.5f;
 	out.num[3][2] = minZ;
+
+	printf_s("\nViewPort Matrix\n");
+	printf_s("-----------------\n");
+	for (int i = 0; i < 4; i++)
+	{
+		printf_s("%.2f %.2f %.2f %.2f\n", out.num[i][0], out.num[i][1], out.num[i][2], out.num[i][3]);
+	}
 }
