@@ -60,7 +60,7 @@ void Cube::Render(HDC targetDC,
 		Vector3D lookAtDir = g_GameManager.getLookAt() - g_GameManager.getEye();
 		float test = faceDir.Dot(lookAtDir) / faceDir.Length() - lookAtDir.Length();
 		printf_s("%d -> cos: %.2f\n", i, cosf(test));
-		if (cosf(test) < 0) break;
+		if (cosf(test) < 0) continue;
 
 		//v1 = viewProj * v1;
 		////백페이스 컬링
