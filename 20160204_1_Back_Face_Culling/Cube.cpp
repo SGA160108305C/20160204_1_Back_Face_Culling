@@ -60,7 +60,7 @@ void Cube::Render(HDC targetDC,
 		Vector3D lookAtDirection = g_GameManager.getLookAt() - g_GameManager.getEye();
 		lookAtDirection.Normalize();
 		float cos = othogonalToFace.Dot(lookAtDirection);
-		printf_s("%d -> cos: %.2f\n", i, cos);
+
 		if (cos > 0)
 		{
 			continue;
