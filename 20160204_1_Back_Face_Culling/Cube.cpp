@@ -46,25 +46,29 @@ void Cube::Render(HDC targetDC,
 	for (int i = 0; i < TRIANGLE_COUNT; ++i)
 	{
 		Vector3D v1 = 
-			vertex[triangles[i].vertexIndex[0]];
+			vertex[triangles[i].vertexIndex[0]];//already normalized in view matrix
 		Vector3D v2 =
 			vertex[triangles[i].vertexIndex[1]];
 		Vector3D v3 =
 			vertex[triangles[i].vertexIndex[2]];
 
-		v1 = viewProj * viewport * v1;
-		v2 = viewProj * viewport * v2;
-		v3 = viewProj * viewport * v3;
+		v1 = viewProj * v1;
+		v2 = viewProj * v2;
+		v3 = viewProj * v3;
 
-		Vector3D faceDir = (v2 - v1).Cross(v3 - v1);
-		Vector3D lookAtDir = g_GameManager.getLookAt() - g_GameManager.getEye();
-		float test = faceDir.Dot(lookAtDir) / faceDir.Length() - lookAtDir.Length();
-		printf_s("%d -> cos: %.2f\n", i, cosf(test));
-		if (cosf(test) < 0) continue;
+		Vector3D othogonalToFace = (v2 - v1).Cross(v3 - v1);
+		Vector3D lookAtDirection = g_GameManager.getLookAt() - g_GameManager.getEye();
+		lookAtDirection.Normalize();
+		float cos = othogonalToFace.Dot(lookAtDirection);
+		printf_s("%d -> cos: %.2f\n", i, cos);
+		if (cos > 0)
+		{
+			continue;
+		}
 
-		//v1 = viewProj * v1;
-		////백페이스 컬링
-		//v1 = viewport * v1;
+		v1 = viewport * v1;
+		v2 = viewport * v2;
+		v3 = viewport * v3;
 
 		MoveToEx(targetDC, (int)v1.x, (int)v1.y, nullptr);
 		LineTo(targetDC, (int)v2.x, (int)v2.y);
