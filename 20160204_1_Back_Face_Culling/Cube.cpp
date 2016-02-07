@@ -56,10 +56,10 @@ void Cube::Render(HDC targetDC,
 		v2 = viewProj * v2;
 		v3 = viewProj * v3;
 
-		Vector3D normal = (v2 - v1).Cross(v3 - v1);
+		Vector3D othogonalToFace = (v2 - v1).Cross(v3 - v1);
 		Vector3D lookAtDirection = g_GameManager.getLookAt() - g_GameManager.getEye();
 		lookAtDirection.Normalize();
-		float cos = normal.Dot(lookAtDirection);
+		float cos = othogonalToFace.Dot(lookAtDirection);
 
 		if (cos > 0)
 		{
